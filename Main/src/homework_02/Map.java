@@ -2,104 +2,80 @@ package homework_02;
 
 import java.util.*;
 
-public class Map{
-
-    MyEntry[] a = new MyEntry[100];
-
-    public <a> Map() {
-        this.a = a;
+public class Map<M ,V extends MyEntry>{
+     private List<M> f = new ArrayList();
+     private List<V> d = new ArrayList();
+    public Map() {
     }
 
-    public MyEntry[] getA() {
-        return a;
+    public List<M> getF() {
+        return f;
     }
 
-    public void setA(MyEntry[] a) {
-        this.a = a;
+    public void setF(List<M> f) {
+        this.f = f;
     }
 
-    public  void add(MyEntry b){
-        for (int i = 0 ; i<a.length;i++){
-            if (a[i]== null){
-                a[i]= b;
-                return;
-            }
-        }
+    public List<V> getD() {
+        return d;
     }
-    public  void removeKey(Number r){
-        ArrayList<MyEntry> list = new ArrayList<>();
-        for (MyEntry f : a){
-            if (f != null){
-                list.add(f);
-            }
-        }
-        int l = 0;
-        while (l<100){
-            for (int i =0 ; i<list.size();i++){
-                if (list.get(i).getV() == r) {
-                    list.remove(list.get(i));
+
+    public void setD(List<V> d) {
+        this.d = d;
+    }
+    public  void add(Integer d ,MyEntry s){
+        if (getF().size() == 0){
+            getF().add((M) d);
+            getD().add((V) s);
+
+        }else {
+            boolean flag = false;
+            for (int i = 0; i<f.size();i++){
+                if (d != f.get(i)){
+                    flag = true;
                 }
             }
-            l++;
+
+            if (flag){
+                getF().add((M) d);
+                getD().add((V) s);
+            }else {
+                System.out.println("Plrase print new key");
         }
-            MyEntry[] s = new MyEntry[100];
-        for (int i = 0 ; i<list.size();i++){
-            if (s[i]==null){
-                s[i] = list.get(i);
-            }
 
         }
-        a=s;
     }
     public  void removeValue(String r){
-        ArrayList<MyEntry> list = new ArrayList<>();
-        for (MyEntry f : a){
-            if (f != null){
-                list.add(f);
+        for (V q : d ){
+            if (q.getM() == r){
+                d.remove(q);
             }
         }
-        int l = 0;
-        while (l<100){
-            for (int i =0 ; i<list.size();i++){
-                if (list.get(i).getM() == r) {
-                    list.remove(list.get(i));
-                }
-            }
-            l++;
-        }
-        MyEntry[] s = new MyEntry[100];
-        for (int i = 0 ; i<list.size();i++){
-            if (s[i]==null){
-                s[i] = list.get(i);
+    }
 
-            }
-        }
-        a=s;
-    }
     public  void printAllKey(){
-        System.out.println(".....................");
-        for (int i = 0 ; i<a.length;i++){
-            if (a[i] != null){
-                System.out.println("--->{"+a[i].getV()+"}Index: "+a[i].getV().hashCode());
-            }
+        for (M q : f){
+            System.out.println(q);
         }
-        System.out.println(".....................");
     }
-    public  void printAllValue(){
-        System.out.println(".....................");
-        for (int i = 0 ; i<a.length;i++){
-            if (a[i] != null){
-                System.out.println("--->{"+a[i].getM()+"}HashCode: "+a[i].getM().hashCode());
-            }
+    public  void printAllObject(){
+        for (V q : d){
+            System.out.println(d);
         }
-        System.out.println(".....................");
     }
-    public  void printAll(){
-        System.out.println(".....................");
-        for (int i = 0 ; i<a.length;i++)
-            if (a[i] != null){
-                System.out.println("--->"+a[i].toString());
+    public void printAll(){
+        for (M q : f){
+            for (V w : d){
+                System.out.println("Key="+q +" Object="+w+" Him key="+w.getM()+" Him values="+w.getV());
             }
-        System.out.println(".....................");
+
+        }
+    }
+    @Override
+    public String toString() {
+        return "Map{" +
+                "f=" + f +
+                ", d=" + d +
+                '}';
     }
     };
